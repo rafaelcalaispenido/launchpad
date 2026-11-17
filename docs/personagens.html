@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Personagem · opções</title>
+<link rel="stylesheet" href="https://static.hotmart.com/fonts/v1/css/hotmart-sans.min.css">
+<link rel="stylesheet" href="https://static.hotmart.com/fonts/v1/css/hotmart-display.min.css">
+<style>
+*{box-sizing:border-box;font-synthesis:none}
+body{margin:0;background:#0D0D0D;color:#F5F3EF;font-family:"Hotmart Sans",Arial,Helvetica,sans-serif;line-height:1.5}
+.wrap{max-width:1200px;margin:0 auto;padding:32px 16px 56px}
+.over{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#FF7A52;margin:0 0 8px}
+h1{font-family:"Hotmart Display","Times New Roman",serif;font-weight:400;letter-spacing:-.02em;line-height:1.05;font-size:clamp(28px,4vw,40px);margin:0 0 24px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:#1A1A18;border:1px solid #3A3936;border-radius:12px;overflow:hidden}
+.card canvas{width:100%;display:block;image-rendering:pixelated;image-rendering:crisp-edges}
+.card div{padding:16px 20px 20px}
+.card h2{font-size:20px;font-weight:700;margin:0 0 4px}
+.card h2 b{color:#FF7A52}
+.card p{margin:0;color:#B2AFA8;font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="over">Personagem</p>
+  <h1>Três opções para o boneco.</h1>
+  <div class="grid">
+    <div class="card"><canvas id="cA" width="74" height="42"></canvas><div><h2><b>A</b> · Cabeção</h2><p>Cabeça grande, contorno escuro, óculos bem visíveis. O mais expressivo e divertido.</p></div></div>
+    <div class="card"><canvas id="cB" width="74" height="42"></canvas><div><h2><b>B</b> · Clássico</h2><p>Proporção de jogo de aventura 16 bits: corpo mais alto, contorno e sombras.</p></div></div>
+    <div class="card"><canvas id="cC" width="74" height="42"></canvas><div><h2><b>C</b> · Limpo</h2><p>Sem contorno, formas suaves. Mais discreto e moderno.</p></div></div>
+  </div>
+</div>
+<script>
+var PAL = { K:'#1A1210', H:'#2B1D14', h:'#4A3324', S:'#E8B48C', s:'#C98F68', B:'#3A2A1F', G:'#111111', L:'#DFF3FF', W:'#FFFFFF', T:'#2F6F73', t:'#245659', O:'#FF4000', o:'#C93200' };
+
+var A = {
+  head: ['....KKKKKKKK....','...KHHHHHHHHK...','..KHHhhHHHHHHK..','..KHHHHHHHHHHK..','..KHHSSSSSSHHK..','..KSGGSSSSGGSK..','..KGLLGGGGLLGK..','..KSGGSSSSGGSK..','..KBSSSSSSSSBK..','..KBBBWWWWBBBK..','..KBBBBBBBBBBK..','...KBBBBBBBBK...','....KKKKKKKK....'],
+  stand: ['...KTTTTTTTTK...','..KSKTTTTTTKSK..','..KSKTTTTTTKSK..','..KSKTTTTTTKSK..','...KKOOOOOOKK...','....KOOOOOOK....','....KOOKKOOK....','....KSSKKSSK....','....KSSKKSSK....','...KSSSKKSSSK...','...KKKK..KKKK...'],
+  sit: ['...KTTTTTTTTK.......','..KSKTTTTTTKSK......','..KSKTTTTTTKKKKKKK..','..KSKTTTTOOOOOSSSSK.','...KKTTTTOOOOOSSSSSK','.....KKKKKKKKKKKKKK.']
+};
+var B = {
+  head: ['....KKKKKK....','...KHHHHHHK...','..KHHhHHHHHK..','..KHHHHHHHHK..','..KHSSSSSSHK..','..KGGGSSGGGK..','..KGLGGGGLGK..','..KGGGSSGGGK..','..KBSSSSSSBK..','..KBBWWWWBBK..','..KBBBBBBBBK..','...KBBBBBBK...','....KKSSKK....'],
+  stand: ['..KKTTTTTTKK..','.KTTTTTTTTTTK.','.KTtTTTTTTtTK.','.KSKTTTTTTKSK.','.KSKTTTTTTKSK.','.KSKTTTTTTKSK.','.KSKtTTTTtKSK.','..KKOOOOOOKK..','...KOOOOOOK...','...KOOOOOOK...','...KOOKKOOK...','...KSSKKSSK...','...KSSKKSSK...','...KSSKKSSK...','...KSsKKSsK...','..KSSSKKSSSK..','..KKKK..KKKK..'],
+  sit: ['..KKTTTTTTKK.........','.KTTTTTTTTTTK........','.KTtTTTTTTtTK........','.KSKTTTTTTKSK........','.KSKTTTTTTKKKKKKKKK..','.KSKTTTTTOOOOOOSSSSK.','..KKtTTTTOOOOOOSSSSSK','....KKKKKKKKKKKKKKKK.']
+};
+var C = {
+  head: ['....HHHHHH....','...HHHHHHHH...','..HHhhHHHHHH..','..HHHHHHHHHH..','..HHSSSSSSHH..','..HSSSSSSSSH..','..SGGGSSGGGS..','..SGLGGGGLGS..','..SGGGSSGGGS..','..BSSSssSSSB..','..BBSWWWWSBB..','..BBBBBBBBBB..','...BBBBBBBB...','.....ssss.....'],
+  stand: ['..TTTTTTTTTT..','.TTTTTTTTTTTT.','.TTTTTTTTTTTT.','.SSTTTTTTTTSS.','.SSTTTTTTTTSS.','.SStTTTTTTtSS.','.ss.OOOOOO.ss.','...OOOOOOOO...','...OOOooOOO...','...OOO..OOO...','...SSS..SSS...','...SSS..SSS...','...SSs..SSs...','..SSSS..SSSS..'],
+  sit: ['..TTTTTTTTTT........','.TTTTTTTTTTTT.......','.TTTTTTTTTTTT.......','.SSTTTTTTTTSS.......','.SSTTTTTTOOOOOOSSSS.','.ss.tTTTTOOOOOOSSSSS','.................sss']
+};
+
+function draw(id, ch){
+  var ctx = document.getElementById(id).getContext('2d');
+  function px(x, y, w, h, c){ ctx.fillStyle = c; ctx.fillRect(x, y, w, h); }
+  function spr(rows, x, y){ for (var r = 0; r < rows.length; r++) for (var c = 0; c < rows[r].length; c++){ var k = rows[r][c]; if (k !== '.') px(x + c, y + r, 1, 1, PAL[k]); } }
+  px(0, 0, 74, 16, '#7FCDF0'); px(0, 16, 74, 8, '#1C7CB8'); px(0, 23, 74, 1, '#FFFFFF'); px(0, 24, 74, 18, '#F0D49A');
+  var ground = 38;
+  // em pé
+  var hS = ch.head.length + ch.stand.length;
+  px(3, ground, 18, 2, '#D9BB7C');
+  spr(ch.head, 4, ground - hS); spr(ch.stand, 4, ground - ch.stand.length);
+  // sentado na cadeira de praia
+  var sx = 30, seat = ground - 5, top = seat - ch.sit.length - ch.head.length + 1;
+  px(sx - 2, ground, 46, 2, '#D9BB7C');
+  for (var b = 0; b < 9; b++) px(sx - 4 + Math.floor(b/2), seat - 16 + b*2, 2, 2, '#FFFFFF');
+  px(sx, seat + 1, 38, 2, '#FFFFFF'); px(sx + 3, seat + 3, 1, 3, '#BBBBBB'); px(sx + 34, seat + 3, 1, 3, '#BBBBBB');
+  spr(ch.head, sx, top); spr(ch.sit, sx, top + ch.head.length);
+}
+draw('cA', A); draw('cB', B); draw('cC', C);
+</script>
+</body>
+</html>
